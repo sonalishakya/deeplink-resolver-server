@@ -8,7 +8,7 @@ const Background = styled(Box)(() => ({
 	backgroundImage: `url("/background.jpg")`,
 	backgroundSize: "cover",
 	backgroundPosition: "center",
-	height: "100vh",
+	minHeight: "100vh",
 	justifyContent: "center",
 	alignItems: "center",
 }));

@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable}`} style={{ margin: 0 }}>
+			<body className={`${geistSans.variable} ${geistMono.variable}`} style={{ margin: 0}}>
 				<BackgroundContainer>{children}</BackgroundContainer>
         <TemplateRepoDialog />
 			</body>
