@@ -16,7 +16,16 @@ import { selectTemplate } from "@/app/actions";
 
 const SelectBaseTemplatePage = () => {
 	return (
-		<>
+		<Box
+			sx={{
+				minHeight: "100vh",
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "flex-start",
+			}}
+			component={"main"}
+		>
 			<Typography variant="h2">Select Template</Typography>
 			<form action={selectTemplate}>
 				<TextField fullWidth title="Search Templates" />
@@ -63,7 +72,7 @@ const SelectBaseTemplatePage = () => {
 					</Button>
 				</Box>
 			</form>
-		</>
+		</Box>
 	);
 };
 

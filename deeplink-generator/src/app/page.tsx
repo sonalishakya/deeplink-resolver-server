@@ -4,18 +4,27 @@ import Link from "next/link";
 
 export default function Home() {
 	return (
-		<Box>
+		<Box
+			sx={{
+				minHeight: "100vh",
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "flex-start",
+			}}
+			component={"main"}
+		>
 			<Typography variant="h1">ONDC Deep Link Generator</Typography>
-      <Link href="/template/select-base">
-			<Button variant="contained" sx={{ m: 1 }}>
-				Create Template
-			</Button>
-      </Link>
-      <Link href="/deep-link">
-			<Button variant="contained" sx={{ m: 1 }}>
-				Generate Deep Link
-			</Button>
-      </Link>
+			<Link href="/template/1">
+				<Button variant="contained" sx={{ m: 1 }}>
+					Create Template
+				</Button>
+			</Link>
+			<Link href="/deep-link">
+				<Button variant="contained" sx={{ m: 1 }}>
+					Generate Deep Link
+				</Button>
+			</Link>
 		</Box>
 	);
 }

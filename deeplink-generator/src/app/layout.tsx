@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { BackgroundContainer } from "./components";
-import TemplateRepoDialog from "./components/TemplateRepoDialog";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -28,7 +27,6 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable}`} style={{ margin: 0}}>
 				<BackgroundContainer>{children}</BackgroundContainer>
-        <TemplateRepoDialog />
 			</body>
 		</html>
 	);

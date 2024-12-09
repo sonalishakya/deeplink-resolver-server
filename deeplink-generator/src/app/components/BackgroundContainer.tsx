@@ -20,11 +20,7 @@ export const BackgroundContainer: React.FC<{
 		<Background>
 			<Container
 				sx={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					height: "100%",
+					minHeight: "100vh",
 				}}
 			>
 				{children}
