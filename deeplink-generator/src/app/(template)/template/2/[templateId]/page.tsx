@@ -15,8 +15,8 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import AddFieldDialog, { NewFieldType } from "@/app/components/AddFieldDialog";
 import { DeleteTwoTone } from "@mui/icons-material";
-import Link from "next/link";
 import Form from "next/form";
+import { createTemplate } from "@/app/actions";
 
 const ExtendTemplatePage = () => {
 	const { templateId } = useParams();
@@ -70,8 +70,10 @@ const ExtendTemplatePage = () => {
 		});
 	};
 
-	const handleFormSubmit = () => {
+	const handleFormSubmit = async (formData: FormData) => {
 		// "use server";
+		const response = await createTemplate(templateId as string, formData);
+		console.log("Response:", response);
 	};
 
 	return (
