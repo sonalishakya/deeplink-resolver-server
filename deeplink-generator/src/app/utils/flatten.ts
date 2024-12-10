@@ -8,7 +8,7 @@ type JsonArray = JsonValue[];
 
 type JsonValue = JsonPrimitive | JsonObject | JsonArray;
 
-interface FillerTypeObject {
+export interface FillerTypeObject {
     filler: string;
     type: string;
     [key: string]: unknown;
