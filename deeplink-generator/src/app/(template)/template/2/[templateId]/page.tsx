@@ -9,13 +9,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import template from "@/app/assets/template.json";
-import { flattenTemplate } from "@/app/utils";
+import { FillerTypeObject, flattenTemplate } from "@/app/utils";
 import { useParams } from "next/navigation";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import AddFieldDialog, { NewFieldType } from "@/app/components/AddFieldDialog";
 import { DeleteTwoTone } from "@mui/icons-material";
 import Link from "next/link";
+import Form from "next/form";
 
 const ExtendTemplatePage = () => {
 	const { templateId } = useParams();
@@ -69,50 +70,70 @@ const ExtendTemplatePage = () => {
 		});
 	};
 
+	const handleFormSubmit = () => {
+		// "use server";
+	};
+
 	return (
 		<>
 			<Typography variant="h2" sx={{ my: 2 }} align="center">
 				Customize Template
 			</Typography>
-			<Paper elevation={4} sx={{ width: "90%", p: 2 }}>
-				{Object.keys(templateValue).map((key: string) => (
-					<Box sx={{ display: "flex", alignItems: "center", my: 2 }} key={key}>
-						<TextField value={key} sx={{ mr: 1 }} />:
-						{typeof templateValue[key] === "string" ? (
-							<TextField value={templateValue[key]} sx={{ ml: 1 }} />
-						) : (
-							<>
-								{JSON.stringify(templateValue[key])}{" "}
-								<IconButton title="Edit Type">
-									<EditTwoToneIcon color="info" />
-								</IconButton>
-							</>
-						)}
-						<IconButton
-							title="Remove Field"
-							onClick={() => handleDeleteField(key)}
+			<Form action={handleFormSubmit} formMethod="POST">
+				<Paper elevation={4} sx={{ width: "90%", p: 2 }}>
+					{Object.keys(templateValue).map((key: string) => (
+						<Box
+							sx={{ display: "flex", alignItems: "center", my: 2 }}
+							key={key}
 						>
-							<DeleteTwoTone color="error" />
-						</IconButton>
+							<TextField value={key} sx={{ mr: 1 }} name={"form_key." + key} />: {" "}
+							{typeof templateValue[key] === "string" ||
+							(templateValue[key] as FillerTypeObject).filler === "admin" ? (
+								<TextField
+									value={templateValue[key]}
+									sx={{ ml: 1 }}
+									name={"form_value." + key}
+								/>
+							) : (
+								<>
+									<Typography>
+										Field to be filled during{" "}
+										{(templateValue[key] as FillerTypeObject).filler} phase.
+									</Typography>
+									<TextField
+										value={JSON.stringify(templateValue[key])}
+										name={"form_value." + key}
+										sx={{ display: "none" }}
+									/>
+									<IconButton title="Edit Type">
+										<EditTwoToneIcon color="info" />
+									</IconButton>
+								</>
+							)}
+							<IconButton
+								title="Remove Field"
+								onClick={() => handleDeleteField(key)}
+							>
+								<DeleteTwoTone color="error" />
+							</IconButton>
+						</Box>
+					))}
+					<Box sx={{ display: "flex", justifyContent: "Center" }}>
+						<Button
+							variant="contained"
+							sx={{ my: 3 }}
+							endIcon={<AddCircleTwoToneIcon />}
+							color="info"
+							onClick={() => setOpenAddFieldDialog(true)}
+						>
+							Add Field
+						</Button>
 					</Box>
-				))}
-				<Box sx={{ display: "flex", justifyContent: "Center" }}>
-					<Button
-						variant="contained"
-						sx={{ my: 3 }}
-						endIcon={<AddCircleTwoToneIcon />}
-						color="info"
-						onClick={() => setOpenAddFieldDialog(true)}
-					>
-						Add Field
-					</Button>
-				</Box>
-			</Paper>
-			<Link href="/template/3">
-				<Button variant="contained" sx={{ my: 3 }}>
+				</Paper>
+				<Button variant="contained" sx={{ my: 3 }} type="submit">
 					Next
 				</Button>
-			</Link>
+			</Form>
 			<AddFieldDialog
 				open={openAddFieldDialog}
 				onClose={() => setOpenAddFieldDialog(false)}
