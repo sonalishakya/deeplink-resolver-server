@@ -3,3 +3,7 @@ export * from "./select-usecase";
 export * from "./generate-deep-link";
 export * from "./create-template";
 export * from "./publish-template";
+export * from "./get-usecase-categories";
+export * from "./get-usecase-subcategories"
+export * from "./get-templates-by-category-and-subcategory";
+export * from "./get-template-by-id";

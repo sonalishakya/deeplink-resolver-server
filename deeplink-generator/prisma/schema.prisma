@@ -21,12 +21,14 @@ enum TemplateStage {
 }
 
 model Template {
-  id            String        @id @default(uuid())
+  id            String             @id @default(uuid())
   name          String?
   description   String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
   value         Json
+  category      UsecaseCategory?
+  subCategory   UsecaseSubcategory?
   usecase       Usecase[]
   templateStage TemplateStage
 }
@@ -47,4 +49,19 @@ model Usecase {
   templateId   String
   name         String
   usecaseStage UsecaseStage
+}
+
+enum UsecaseCategory {
+  RETAIL
+  LOGISTICS
+  MOBILITY
+  SERVICES
+}
+
+enum UsecaseSubcategory {
+  SEARCH_CATELOG
+  SEARCH_BY_CITY
+  SEARCH_BY_ITEM
+  SEARCH_BY_CATEGORY
+  OFFERS
 }

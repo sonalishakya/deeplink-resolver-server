@@ -7,32 +7,42 @@ import {
 	Radio,
 	RadioGroup,
 	TextField,
+	Toolbar,
 	Typography,
 } from "@mui/material";
 import React from "react";
 
-import template from "@/app/assets/template.json";
-import { selectUsecase } from "@/app/actions";
+import {
+	getTemplateByCategoryAndSubcategory,
+	selectUsecase,
+} from "@/app/actions";
+import { CustomContainedButtom, CustomHeading } from "@/app/components";
 
-const SelectUsecasePage = () => {
+const SelectUsecasePage = async ({
+	params,
+}: {
+	params: Promise<{ category: string; subcategory: string }>;
+}) => {
+	const { category, subcategory } = await params;
+	const templates = await getTemplateByCategoryAndSubcategory(
+		category,
+		subcategory
+	);
 	return (
-		<Box
-			sx={{
-				minHeight: "100vh",
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "flex-start",
-			}}
-			component={"main"}
-		>
-			<Typography variant="h2">Select Template</Typography>
+		<>
+			<Toolbar />
+			<CustomHeading heading="Select Template" />
+			<Toolbar />
 			<form action={selectUsecase}>
-				<TextField fullWidth title="Search Templates" />
-				<RadioGroup name="templateId" defaultValue={1}>
-					{[1, 2, 3, 4].map((i) => (
+				<TextField
+					fullWidth
+					title="Search Templates"
+					placeholder="Search Templates..."
+				/>
+				<RadioGroup name="templateId" defaultValue={templates[0].id}>
+					{templates.map((template) => (
 						<Box
-							key={i}
+							key={template.id}
 							sx={{
 								my: 1,
 								width: "100%",
@@ -41,7 +51,7 @@ const SelectUsecasePage = () => {
 								alignItems: "center",
 							}}
 						>
-							<Radio value={i} required />
+							<Radio value={template.id} required />
 							<Accordion sx={{ ml: 1, width: "100%" }}>
 								<AccordionSummary>
 									<Typography>Usecase: {template.name}</Typography>
@@ -67,12 +77,10 @@ const SelectUsecasePage = () => {
 						alignItems: "center",
 					}}
 				>
-					<Button variant="contained" type="submit">
-						Next
-					</Button>
+					<CustomContainedButtom type="submit">Next</CustomContainedButtom>
 				</Box>
 			</form>
-		</Box>
+		</>
 	);
 };
 
