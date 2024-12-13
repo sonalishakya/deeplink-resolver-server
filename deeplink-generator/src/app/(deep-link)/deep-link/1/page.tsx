@@ -44,7 +44,7 @@ const SelectUsecasePage = () => {
 							<Radio value={i} required />
 							<Accordion sx={{ ml: 1, width: "100%" }}>
 								<AccordionSummary>
-									<Typography>Usecase: {template.name}</Typography>
+									<Typography>{template.name}</Typography>
 								</AccordionSummary>
 								<AccordionDetails>
 									<Typography>
