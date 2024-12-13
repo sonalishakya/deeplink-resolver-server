@@ -20,7 +20,7 @@ export default function Home() {
 					Create Template
 				</Button>
 			</Link>
-			<Link href="/deep-link/1">
+			<Link href="/deep-link">
 				<Button variant="contained" sx={{ m: 1 }}>
 					Generate Deep Link
 				</Button>

@@ -47,7 +47,7 @@ model Usecase {
   updatedAt    DateTime     @updatedAt
   value        Json
   templateId   String
-  name         String
+  name         String?
   usecaseStage UsecaseStage
 }
 

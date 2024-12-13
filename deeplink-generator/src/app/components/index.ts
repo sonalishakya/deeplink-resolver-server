@@ -4,3 +4,6 @@ export * from "./CustomTextArea";
 export * from "./CustomHeading";
 export * from "./CustomContainedButtom";
 export * from "./CustomOutlinedButton";
+export * from "./DeepLinkCopyBox";
+export * from "./SocialsList";
+export * from "./TemplateCreator";

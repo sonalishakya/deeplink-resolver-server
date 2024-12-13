@@ -25,7 +25,7 @@ const SelectUsecaseCategoryPage = async () => {
 					{categories.map((category, index) => (
 						<Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
 							<CustomOutlinedButton
-								href={`/deep-link/${category}`}
+								href={`/deep-link/filter/${category}`}
 								label={category}
 							/>
 						</Grid>

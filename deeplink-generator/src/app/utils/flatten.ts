@@ -32,6 +32,12 @@ export function flattenTemplate(obj: JsonValue): Record<string, JsonValue> {
             return;
         }
 
+        // Handle FillerTypeObject at any level
+        if (isFillerTypeObject(currentObj)) {
+            result[prefix] = currentObj;
+            return;
+        }
+
         // Handle primitive values
         if (typeof currentObj !== 'object') {
             result[prefix] = currentObj;
@@ -42,35 +48,15 @@ export function flattenTemplate(obj: JsonValue): Record<string, JsonValue> {
         if (Array.isArray(currentObj)) {
             currentObj.forEach((item, index) => {
                 const arrayKey = prefix ? `${prefix}[${index}]` : `[${index}]`;
-                
-                if (item === null || item === undefined) {
-                    result[arrayKey] = item;
-                } else if (typeof item === 'object') {
-                    flatten(item, arrayKey);
-                } else {
-                    result[arrayKey] = item;
-                }
+                flatten(item, arrayKey);
             });
             return;
         }
 
         // Handle object
         for (const [key, value] of Object.entries(currentObj)) {
-            // Current full path key
             const fullKey = prefix ? `${prefix}.${key}` : key;
-
-            // If the object has 'filler' and 'type', keep the entire object
-            if (isFillerTypeObject(value)) {
-                result[fullKey] = value;
-                continue;
-            }
-
-            // Recursively flatten
-            if (typeof value === 'object' && value !== null) {
-                flatten(value, fullKey);
-            } else {
-                result[fullKey] = value;
-            }
+            flatten(value, fullKey);
         }
     }
 

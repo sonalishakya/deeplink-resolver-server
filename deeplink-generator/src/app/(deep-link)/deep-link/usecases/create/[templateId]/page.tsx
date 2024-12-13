@@ -12,8 +12,9 @@ import Form from "next/form";
 
 import template from "@/app/assets/template.json";
 import { FillerTypeObject, flattenTemplate } from "@/app/utils";
-import { generateDeepLink } from "@/app/actions";
+import { createDeepLink } from "@/app/actions";
 import { CustomContainedButtom, CustomHeading } from "@/app/components";
+import { redirect } from "next/navigation";
 const GenerateDeepLinkPage = async ({
 	params,
 }: {
@@ -21,15 +22,21 @@ const GenerateDeepLinkPage = async ({
 }) => {
 	const templateId = (await params).templateId;
 	const templateValue = flattenTemplate(template.value);
+	console.log("TEMPLATE VALUE", templateValue);
 	const handleSubmit = async (form: FormData) => {
 		"use server";
-		generateDeepLink(templateId, form);
+		if (!form) {
+			throw new Error("Form data is required");
+		}
+		console.log("CREATING DEEP LINK")
+		const deepLink = await createDeepLink(templateId, form);
+		console.log("Redirecting")
+		redirect(`/deep-link/usecases/publish/${deepLink.id}`);
 	};
 	return (
 		<>
 			<Toolbar />
 			<CustomHeading heading="Generate Deep Link" />
-
 			<Form action={handleSubmit} formMethod="POST">
 				<Paper
 					elevation={4}
@@ -42,27 +49,6 @@ const GenerateDeepLinkPage = async ({
 						my: 4,
 					}}
 				>
-					<Stack
-						direction="row"
-						my={2}
-						alignItems="center"
-						justifyContent="space-evenly"
-					>
-						<Paper
-							sx={{
-								p: 2,
-								borderColor: "primary.light",
-								borderWidth: 2,
-								borderStyle: "solid",
-								borderRadius: 2,
-							}}
-						>
-							<Typography variant="h6">Deep Link Name</Typography>
-						</Paper>
-						<Typography variant="h5">:</Typography>
-						<TextField value="deeplinkName" sx={{ ml: 1 }} />
-					</Stack>
-
 					{Object.keys(templateValue).map((key: string) => (
 						<>
 							<Stack
@@ -94,7 +80,7 @@ const GenerateDeepLinkPage = async ({
 								) : (templateValue[key] as FillerTypeObject).filler ===
 								  "user" ? (
 									<TextField
-										value={(templateValue[key] as FillerTypeObject).value}
+										defaultValue={(templateValue[key] as FillerTypeObject).value}
 										sx={{ ml: 1 }}
 										name={key}
 									/>
