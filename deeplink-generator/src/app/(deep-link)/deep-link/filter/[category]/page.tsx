@@ -1,7 +1,7 @@
 import { getUsecaseSubcategories } from "@/app/actions";
 import { CustomHeading, CustomOutlinedButton } from "@/app/components";
 import { formatToNormalCasing } from "@/app/utils";
-import { Grid2 as Grid, Paper, Toolbar } from "@mui/material";
+import { Grid2 as Grid, Paper, } from "@mui/material";
 import React from "react";
 
 const SelectUsecaseSubcategory = async ({
@@ -13,7 +13,6 @@ const SelectUsecaseSubcategory = async ({
 	const subcategories = await getUsecaseSubcategories(category);
 	return (
 		<>
-			<Toolbar />
 			<CustomHeading heading="Usecase Subcategories" />
 
 			<Paper
@@ -24,7 +23,8 @@ const SelectUsecaseSubcategory = async ({
 					borderWidth: 2,
 					borderStyle: "solid",
 					borderRadius: 2,
-					mt: 4,
+					mt: 2,
+					width: "100%",
 				}}
 			>
 				<Grid container spacing={2}>

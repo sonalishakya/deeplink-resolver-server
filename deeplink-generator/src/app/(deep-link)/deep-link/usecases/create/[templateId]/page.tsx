@@ -4,7 +4,6 @@ import {
 	Paper,
 	Stack,
 	TextField,
-	Toolbar,
 	Typography,
 } from "@mui/material";
 import React from "react";
@@ -35,9 +34,8 @@ const GenerateDeepLinkPage = async ({
 	};
 	return (
 		<>
-			<Toolbar />
 			<CustomHeading heading="Generate Deep Link" />
-			<Form action={handleSubmit} formMethod="POST">
+			<Form action={handleSubmit} formMethod="POST" style={{ width: "100%" }}>
 				<Paper
 					elevation={4}
 					sx={{
@@ -46,7 +44,7 @@ const GenerateDeepLinkPage = async ({
 						borderWidth: 2,
 						borderStyle: "solid",
 						borderRadius: 2,
-						my: 4,
+						my: 2,
 					}}
 				>
 					{Object.keys(templateValue).map((key: string) => (

@@ -1,6 +1,6 @@
 import { getUsecaseCategories } from "@/app/actions";
 import { CustomHeading, CustomOutlinedButton } from "@/app/components";
-import { Grid2 as Grid, Paper, Toolbar } from "@mui/material";
+import { Grid2 as Grid, Paper } from "@mui/material";
 import React from "react";
 
 const SelectUsecaseCategoryPage = async () => {
@@ -8,7 +8,6 @@ const SelectUsecaseCategoryPage = async () => {
 	console.log("ategories", categories);
 	return (
 		<>
-			<Toolbar />
 			<CustomHeading heading="Usecase Categories" />
 			<Paper
 				elevation={3}
@@ -18,7 +17,8 @@ const SelectUsecaseCategoryPage = async () => {
 					borderWidth: 2,
 					borderStyle: "solid",
 					borderRadius: 2,
-					mt: 4,
+					mt: 2,
+					width: "100%",
 				}}
 			>
 				<Grid container spacing={2}>

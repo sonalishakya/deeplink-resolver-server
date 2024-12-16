@@ -14,6 +14,7 @@ import React from "react";
 // import template from "@/app/assets/template.json";
 import { getAllTemplates } from "@/app/actions";
 import { redirect } from "next/navigation";
+import { CustomHeading } from "@/app/components";
 
 const SelectBaseTemplatePage = async () => {
 	const templates = await getAllTemplates();
@@ -25,17 +26,8 @@ const SelectBaseTemplatePage = async () => {
 		redirect(`/template/2/${form.get("templateId")}`);
 	};
 	return (
-		<Box
-			sx={{
-				minHeight: "100vh",
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "flex-start",
-			}}
-			component={"main"}
-		>
-			<Typography variant="h2">Select Template</Typography>
+		<>
+			<CustomHeading heading="Select Base Template"/>
 			<form action={handleTemplateSelection}>
 				<TextField fullWidth title="Search Templates" />
 				<RadioGroup name="templateId" defaultValue={templates[0].id}>
@@ -81,7 +73,7 @@ const SelectBaseTemplatePage = async () => {
 					</Button>
 				</Box>
 			</form>
-		</Box>
+		</>
 	);
 };
 

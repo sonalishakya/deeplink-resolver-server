@@ -21,16 +21,20 @@ enum TemplateStage {
 }
 
 model Template {
-  id            String             @id @default(uuid())
-  name          String?
-  description   String?
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  value         Json
-  category      UsecaseCategory?
-  subCategory   UsecaseSubcategory?
-  usecase       Usecase[]
-  templateStage TemplateStage
+  id                   String             @id @default(uuid())
+  name                 String?
+  description          String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  value                Json
+  category             UsecaseCategory    @relation(fields: [usecaseCategoryId], references: [id])
+  subCategory          UsecaseSubcategory @relation(fields: [usecaseSubcategoryId], references: [id])
+  usecase              Usecase[]
+  templateStage        TemplateStage
+  usecaseCategoryId    String
+  usecaseSubcategoryId String
+  @@unique([usecaseCategoryId, usecaseSubcategoryId])
+  @@index([usecaseCategoryId, usecaseSubcategoryId])
 }
 
 enum UsecaseStage {
@@ -51,17 +55,14 @@ model Usecase {
   usecaseStage UsecaseStage
 }
 
-enum UsecaseCategory {
-  RETAIL
-  LOGISTICS
-  MOBILITY
-  SERVICES
+model UsecaseCategory {
+  id       String     @id @default(uuid())
+  name     String
+  Template Template[]
 }
 
-enum UsecaseSubcategory {
-  SEARCH_CATELOG
-  SEARCH_BY_CITY
-  SEARCH_BY_ITEM
-  SEARCH_BY_CATEGORY
-  OFFERS
+model UsecaseSubcategory {
+  id       String     @id @default(uuid())
+  name     String
+  Template Template[]
 }

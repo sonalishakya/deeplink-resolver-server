@@ -7,7 +7,6 @@ import {
 	Radio,
 	RadioGroup,
 	TextField,
-	Toolbar,
 	Typography,
 } from "@mui/material";
 import React from "react";
@@ -35,9 +34,7 @@ const SelectUsecasePage = async ({
 
 	return (
 		<>
-			<Toolbar />
 			<CustomHeading heading="Select Template" />
-			<Toolbar />
 			<form action={handleSelection}>
 				<TextField
 					fullWidth

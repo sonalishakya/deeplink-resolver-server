@@ -75,8 +75,8 @@ export const TemplateCreator = ({ template }: TemplateCreatorProps) => {
 	};
 	return (
 		<>
-			<Form action={handleFormSubmit} formMethod="POST">
-				<Paper elevation={4} sx={{ width: "90%", p: 2 }}>
+			<Form action={handleFormSubmit} formMethod="POST" style={{width: "100%"}}>
+				<Paper elevation={4} sx={{ width: "100%", p: 2 }}>
 					{Object.keys(templateValue).map((key: string) => (
 						<Box
 							sx={{ display: "flex", alignItems: "center", my: 2 }}
