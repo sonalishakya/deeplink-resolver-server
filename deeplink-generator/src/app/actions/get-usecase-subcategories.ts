@@ -1,6 +1,5 @@
-import { UsecaseSubcategory } from "@prisma/client";
+import { db } from "../../../db";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getUsecaseSubcategories(_category: string) {
-	return Object.keys(UsecaseSubcategory) as string[];
+export async function getUsecaseSubcategories() {
+	return db.usecaseSubcategory.findMany();
 }

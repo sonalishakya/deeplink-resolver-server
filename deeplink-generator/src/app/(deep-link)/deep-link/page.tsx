@@ -5,7 +5,6 @@ import React from "react";
 
 const SelectUsecaseCategoryPage = async () => {
 	const categories = await getUsecaseCategories();
-	console.log("ategories", categories);
 	return (
 		<>
 			<CustomHeading heading="Usecase Categories" />
@@ -25,8 +24,8 @@ const SelectUsecaseCategoryPage = async () => {
 					{categories.map((category, index) => (
 						<Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
 							<CustomOutlinedButton
-								href={`/deep-link/filter/${category}`}
-								label={category}
+								href={`/deep-link/filter/${category.id}`}
+								label={category.name}
 							/>
 						</Grid>
 					))}

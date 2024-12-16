@@ -1,4 +1,4 @@
-import { Typography, Box, Grid2 as Grid, Fade } from "@mui/material";
+import { Typography, Box, Fade } from "@mui/material";
 import Link from "next/link";
 import { CustomButton } from "../components";
 // import Image from "next/image";
@@ -37,22 +37,22 @@ export default function Home() {
 					Generator
 				</Typography>
 			</Fade>
-			<Grid container spacing={2} justifyContent="center" alignItems="center">
-				<Grid size={{xs: 12, md: 5}}>
+			{/* <Grid container spacing={2} justifyContent="center" alignItems="center"> */}
+				{/* <Grid size={{xs: 12, md: 5}}>
 					<Link href="/template/1">
 						<CustomButton sx={{ padding: "40px 80px" }}>
 							<Typography variant="h3">Create Usecase</Typography>
 						</CustomButton>
 					</Link>
-				</Grid>
-				<Grid size={{xs: 12, md: 5}}>
+				</Grid> */}
+				{/* <Grid size={{xs: 12, md: 5}}> */}
 					<Link href="/deep-link">
 						<CustomButton sx={{ padding: "40px 80px" }}>
 							<Typography variant="h3">Create Deeplink</Typography>
 						</CustomButton>
 					</Link>
-				</Grid>
-			</Grid>
+				{/* </Grid>
+			</Grid> */}
 		</Box>
 	);
 }

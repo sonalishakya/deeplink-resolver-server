@@ -1,16 +1,16 @@
 import { getUsecaseSubcategories } from "@/app/actions";
 import { CustomHeading, CustomOutlinedButton } from "@/app/components";
-import { formatToNormalCasing } from "@/app/utils";
+// import { formatToNormalCasing } from "@/app/utils";
 import { Grid2 as Grid, Paper, } from "@mui/material";
 import React from "react";
 
 const SelectUsecaseSubcategory = async ({
 	params,
 }: {
-	params: Promise<{ category: string }>;
+	params: Promise<{ categoryId: string }>;
 }) => {
-	const category = (await params).category;
-	const subcategories = await getUsecaseSubcategories(category);
+	const categoryId = (await params).categoryId;
+	const subcategories = await getUsecaseSubcategories();
 	return (
 		<>
 			<CustomHeading heading="Usecase Subcategories" />
@@ -31,8 +31,9 @@ const SelectUsecaseSubcategory = async ({
 					{subcategories.map((subcategory, index) => (
 						<Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
 							<CustomOutlinedButton
-								href={`/deep-link/usecases/browse?category=${category}&subcategory${subcategory}`}
-								label={formatToNormalCasing(subcategory)}
+								href={`/deep-link/usecases/browse?category=${categoryId}&subcategory${subcategory.id}`}
+								// label={formatToNormalCasing(subcategory.name)}
+								label={subcategory.name}
 							/>
 						</Grid>
 					))}

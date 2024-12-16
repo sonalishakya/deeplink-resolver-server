@@ -1,15 +1,15 @@
-import { UsecaseCategory, UsecaseSubcategory } from "@prisma/client";
+"use server";
 import { db } from "../../../db";
 
 export async function getTemplateByCategoryAndSubcategory(
-	category: string,
-	subCategory: string
+	usecaseCategoryId: string,
+	usecaseSubcategoryId: string
 ) {
 	const templates = await db.template.findMany({
-		// where: {
-		// 	category: category as UsecaseCategory,
-		// 	subCategory: subCategory as UsecaseSubcategory,
-		// },
+		where: {
+			usecaseCategoryId,
+			usecaseSubcategoryId,
+		},
 	});
 	return templates;
 }

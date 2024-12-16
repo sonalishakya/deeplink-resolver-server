@@ -1,5 +1,5 @@
-import { UsecaseCategory } from "@prisma/client";
+import { db } from "../../../db";
 
 export const getUsecaseCategories = async () => {
-	return Object.values(UsecaseCategory) as string[];
+	return db.usecaseCategory.findMany();
 };
