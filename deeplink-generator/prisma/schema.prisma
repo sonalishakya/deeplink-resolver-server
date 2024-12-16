@@ -33,6 +33,7 @@ model Template {
   templateStage        TemplateStage
   usecaseCategoryId    String
   usecaseSubcategoryId String
+
   @@unique([usecaseCategoryId, usecaseSubcategoryId])
   @@index([usecaseCategoryId, usecaseSubcategoryId])
 }
@@ -57,12 +58,12 @@ model Usecase {
 
 model UsecaseCategory {
   id       String     @id @default(uuid())
-  name     String
+  name     String     @unique
   Template Template[]
 }
 
 model UsecaseSubcategory {
   id       String     @id @default(uuid())
-  name     String
+  name     String     @unique
   Template Template[]
 }
