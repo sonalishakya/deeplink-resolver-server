@@ -1,7 +1,9 @@
 import {
 	Box,
 	Divider,
+	MenuItem,
 	Paper,
+	Select,
 	Stack,
 	TextField,
 	Typography,
@@ -9,9 +11,12 @@ import {
 import React from "react";
 import Form from "next/form";
 
-import template from "@/app/assets/template.json";
-import { FillerTypeObject, flattenTemplate } from "@/app/utils";
-import { createDeepLink } from "@/app/actions";
+import {
+	FillerTypeObject,
+	flattenTemplate,
+	inputTypeMapper,
+} from "@/app/utils";
+import { createDeepLink, getTemplateById } from "@/app/actions";
 import {
 	CustomContainedButtom,
 	CustomHeading,
@@ -24,7 +29,8 @@ const GenerateDeepLinkPage = async ({
 	params: Promise<{ templateId: string }>;
 }) => {
 	const templateId = (await params).templateId;
-	const templateValue = flattenTemplate(template.value);
+	const template = await getTemplateById(templateId);
+	const templateValue = flattenTemplate(template!.value);
 	console.log("TEMPLATE VALUE", templateValue);
 	const handleSubmit = async (form: FormData) => {
 		"use server";
@@ -66,19 +72,56 @@ const GenerateDeepLinkPage = async ({
 								>
 									<FieldName fieldName={key} />
 									<Typography mx={1}>:</Typography>
-
-									<TextField
-										defaultValue={
-											(templateValue[key] as FillerTypeObject).value
-										}
-										type={(templateValue[key] as FillerTypeObject).type === "string" ? "text" : "number"}
-										sx={{ ml: 1 }}
-										name={key}
-										fullWidth
-									/>
+									{(templateValue[key] as FillerTypeObject)?.enum &&
+									(templateValue[key] as FillerTypeObject)?.enum!.length > 0 ? (
+										<Select
+											defaultValue={
+												(templateValue[key] as FillerTypeObject).enum![0]
+											}
+											fullWidth
+											name={key}
+										>
+											{(templateValue[key] as FillerTypeObject).enum!.map(
+												(value, index) => (
+													<MenuItem key={key + value + index} value={value}>
+														<Typography variant="body2">{value}</Typography>
+													</MenuItem>
+												)
+											)}
+										</Select>
+									) : (
+										<TextField
+											defaultValue={
+												(templateValue[key] as FillerTypeObject).value
+											}
+											type={inputTypeMapper(
+												(templateValue[key] as FillerTypeObject).type
+											)}
+											sx={{ ml: 1 }}
+											name={key}
+											fullWidth
+										/>
+									)}
 								</Stack>
 								<Divider />
 							</React.Fragment>
+						))}
+					{Object.keys(templateValue)
+						.filter(
+							(key) =>
+								(templateValue[key] as FillerTypeObject).filler !== "user"
+						)
+						.map((key: string, index) => (
+							<TextField
+								key={key + index}
+								value={
+									typeof templateValue[key] === "object"
+										? JSON.stringify(templateValue[key])
+										: templateValue[key]
+								}
+								sx={{ ml: 1, display: "none" }}
+								name={key}
+							/>
 						))}
 				</Paper>
 				<Box

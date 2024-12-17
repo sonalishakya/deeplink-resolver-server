@@ -11,6 +11,7 @@ type JsonValue = JsonPrimitive | JsonObject | JsonArray;
 export interface FillerTypeObject {
     filler: string;
     type: string;
+    enum?: Array<string | number>;
     [key: string]: unknown;
 }
 

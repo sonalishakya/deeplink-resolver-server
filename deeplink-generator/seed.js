@@ -47,7 +47,11 @@ async function main() {
 			description: "This is an example template",
 			value: {
 				context: {
-					domain: "ONDC:RET10",
+					domain: {
+						type: "string",
+						filler: "user",
+						enum: ["ONDC:RET10", "ONDC:RET11", "ONDC:RET13"],
+					},
 					action: "search",
 					country: { filler: "pg", type: "string" },
 					city: { filler: "pg", type: "string" },
@@ -76,6 +80,7 @@ async function main() {
 									},
 								},
 							},
+							id: { filler: "user", type: "number", enum: [1, 2, 3] },
 						},
 						payment: {
 							"@ondc/org/buyer_app_finder_fee_type": {
@@ -84,15 +89,9 @@ async function main() {
 							},
 							"@ondc/org/buyer_app_finder_fee_amount": {
 								filler: "user",
-								type: "string",
+								type: "number",
 							},
 						},
-						tags: [
-							{
-								code: "source_id",
-								Value: { filler: "user", type: "string" },
-							},
-						],
 					},
 				},
 			},
