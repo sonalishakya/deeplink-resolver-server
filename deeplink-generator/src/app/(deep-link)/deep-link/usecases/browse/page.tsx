@@ -99,7 +99,7 @@ const SelectUsecasePage = async ({
 				</Form>
 			) : (
 				<>
-					<Typography mb={3}>
+					<Typography variant="body2" mb={3}>
 						There are not templates defined for this category and sub category
 						currently.
 					</Typography>

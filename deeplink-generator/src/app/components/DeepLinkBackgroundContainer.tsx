@@ -11,7 +11,7 @@ export const DeepLinkBackgroundContainer: React.FC<{
 				display: "flex",
 				justifyContent: "flex-start",
 				alignItems: "center",
-				flexDirection: "column",
+				flexDirection: "column"
 			}}
 		>
 			{children}

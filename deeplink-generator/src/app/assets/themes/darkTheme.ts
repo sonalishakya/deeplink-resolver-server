@@ -39,13 +39,13 @@ export const darkTheme = createTheme({
 		},
 		body1: {
 			fontWeight: 500,
-			color: colors.grey[700],
-			fontSize: "1rem",
+			color: colors.grey[400],
+			fontSize: "1.2rem",
 		},
 		body2: {
 			fontWeight: 550,
 			color: colors.grey[500],
-			fontSize: "1.2rem",
+			fontSize: "1rem",
 		},
 	},
 });

@@ -12,7 +12,11 @@ import Form from "next/form";
 import template from "@/app/assets/template.json";
 import { FillerTypeObject, flattenTemplate } from "@/app/utils";
 import { createDeepLink } from "@/app/actions";
-import { CustomContainedButtom, CustomHeading } from "@/app/components";
+import {
+	CustomContainedButtom,
+	CustomHeading,
+	FieldName,
+} from "@/app/components";
 import { redirect } from "next/navigation";
 const GenerateDeepLinkPage = async ({
 	params,
@@ -27,9 +31,9 @@ const GenerateDeepLinkPage = async ({
 		if (!form) {
 			throw new Error("Form data is required");
 		}
-		console.log("CREATING DEEP LINK")
+		console.log("CREATING DEEP LINK");
 		const deepLink = await createDeepLink(templateId, form);
-		console.log("Redirecting")
+		console.log("Redirecting");
 		redirect(`/deep-link/usecases/publish/${deepLink.id}`);
 	};
 	return (
@@ -47,63 +51,35 @@ const GenerateDeepLinkPage = async ({
 						my: 2,
 					}}
 				>
-					{Object.keys(templateValue).map((key: string) => (
-						<>
-							<Stack
-								direction="row"
-								key={key}
-								my={2}
-								alignItems="center"
-								justifyContent="space-evenly"
-							>
-								<Paper
-									sx={{
-										p: 2,
-										borderColor: "primary.light",
-										borderWidth: 2,
-										borderStyle: "solid",
-										borderRadius: 2,
-									}}
+					{Object.keys(templateValue)
+						.filter(
+							(key) =>
+								(templateValue[key] as FillerTypeObject).filler === "user"
+						)
+						.map((key: string) => (
+							<React.Fragment key={key}>
+								<Stack
+									direction="row"
+									my={2}
+									alignItems="center"
+									justifyContent="flex-start"
 								>
-									<Typography variant="h6">{key}</Typography>
-								</Paper>
-								<Typography variant="h5">:</Typography>
-								{typeof templateValue[key] === "string" ? (
+									<FieldName fieldName={key} />
+									<Typography mx={1}>:</Typography>
+
 									<TextField
-										value={templateValue[key]}
-										sx={{ ml: 1 }}
-										disabled
-										name={key}
-									/>
-								) : (templateValue[key] as FillerTypeObject).filler ===
-								  "user" ? (
-									<TextField
-										defaultValue={(templateValue[key] as FillerTypeObject).value}
+										defaultValue={
+											(templateValue[key] as FillerTypeObject).value
+										}
+										type={(templateValue[key] as FillerTypeObject).type === "string" ? "text" : "number"}
 										sx={{ ml: 1 }}
 										name={key}
+										fullWidth
 									/>
-								) : (
-									<>
-										{" "}
-										<TextField
-											value={JSON.stringify(templateValue[key])}
-											name={key}
-											sx={{ ml: 1, display: "none" }}
-										/>
-										<Typography
-											sx={{ ml: 1 }}
-											color="textSecondary"
-											variant="body2"
-										>
-											{" "}
-											To be filled During Post-Generation
-										</Typography>
-									</>
-								)}
-							</Stack>
-							<Divider />
-						</>
-					))}
+								</Stack>
+								<Divider />
+							</React.Fragment>
+						))}
 				</Paper>
 				<Box
 					sx={{

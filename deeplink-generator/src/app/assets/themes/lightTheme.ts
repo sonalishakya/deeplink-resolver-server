@@ -44,12 +44,13 @@ export const lightTheme = createTheme({
 		},
 		body1: {
 			fontWeight: 500,
+			color: colors.grey[700],
 			fontSize: "1.2rem",
 		},
 		body2: {
 			fontWeight: 550,
-			color: colors.grey[500],
-			fontSize: "1.2rem",
-		}
+			color: colors.grey[600],
+			fontSize: "1rem",
+		},
 	},
 });

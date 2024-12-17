@@ -1,5 +1,10 @@
 import { getUsecaseById, publishUsecase } from "@/app/actions";
-import { CustomContainedButtom, CustomHeading } from "@/app/components";
+import {
+	CustomContainedButtom,
+	CustomHeading,
+	FieldName,
+} from "@/app/components";
+import JsonViewer from "@/app/components/JsonViewer";
 import {
 	Box,
 	Divider,
@@ -34,7 +39,11 @@ const PublishDeepLinkPage = async ({
 	return (
 		<>
 			<CustomHeading heading="Publish Deep Link" />
-			<Form action={handleFormSubmit} formMethod="POST">
+			<Form
+				action={handleFormSubmit}
+				formMethod="POST"
+				style={{ width: "100%" }}
+			>
 				<Paper
 					elevation={4}
 					sx={{
@@ -47,49 +56,30 @@ const PublishDeepLinkPage = async ({
 					}}
 				>
 					<Grid container spacing={1}>
-						<Grid size={{ xs: 12, md: 5 }}>
+						<Grid size={{ xs: 12, md: 6 }}>
 							<Stack
 								direction="row"
 								my={2}
 								alignItems="center"
-								justifyContent="space-evenly"
+								justifyContent="flex-start"
 							>
-								<Paper
-									sx={{
-										p: 2,
-										borderColor: "primary.light",
-										borderWidth: 2,
-										borderStyle: "solid",
-										borderRadius: 2,
-									}}
-								>
-									<Typography variant="h6">Name</Typography>
-								</Paper>
+								<FieldName fieldName="Name" />
 								<Typography variant="h5">:</Typography>
-								<TextField sx={{ ml: 1 }} name="name" />
+								<TextField sx={{ ml: 1 }} name="name" fullWidth />
 							</Stack>
 							<Divider />
 							<Stack
 								direction="row"
 								my={2}
 								alignItems="center"
-								justifyContent="space-evenly"
+								justifyContent="flex-start"
 							>
-								<Paper
-									sx={{
-										p: 2,
-										borderColor: "primary.light",
-										borderWidth: 2,
-										borderStyle: "solid",
-										borderRadius: 2,
-									}}
-								>
-									<Typography variant="h6">Publish To:</Typography>
-								</Paper>
+								<FieldName fieldName="Publish To" />
 								<Typography variant="h5">:</Typography>
 								<Select
 									name="submissionOption"
 									defaultValue={UsecaseStage.PUBLISHED}
+									fullWidth
 								>
 									<MenuItem value={UsecaseStage.SUBMITTED}>
 										Keep Private
@@ -101,11 +91,9 @@ const PublishDeepLinkPage = async ({
 							</Stack>
 							<Divider />
 						</Grid>
-						<Grid size={{ xs: 12, md: 1 }}>
-							<Paper elevation={5}/>
-						</Grid>
 						<Grid size={{ xs: 12, md: 6 }}>
-							<Typography>{JSON.stringify(usecase?.value)}</Typography>
+							<JsonViewer data={usecase?.value as object}/>
+							{/* <Typography>{JSON.stringify(usecase?.value)}</Typography> */}
 						</Grid>
 					</Grid>
 				</Paper>
