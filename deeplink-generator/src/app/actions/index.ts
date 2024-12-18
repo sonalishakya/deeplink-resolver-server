@@ -8,3 +8,4 @@ export * from "./get-template-by-id";
 export * from "./get-usecase-by-id";
 export * from "./publish-usecase";
 export * from "./get-all-templates"
+export * from "./get-pdf"

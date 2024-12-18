@@ -39,7 +39,7 @@ const DeepLinkThankYouPage = async ({
 					</Box>
 				</Grid>
 				<Grid size={{ xs: 12, md: 3 }}>
-					<DownloadQr />
+					<DownloadQr link={`beckn://github.ondc.ret10/${deepLinkId}`}/>
 				</Grid>
 				<Grid size={{ xs: 12, md: 8 }}>
 					<SocialsList />

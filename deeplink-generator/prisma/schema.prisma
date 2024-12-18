@@ -53,6 +53,7 @@ model Usecase {
   value        Json
   templateId   String
   name         String?
+  qrPdfLink String?
   usecaseStage UsecaseStage
 }
 

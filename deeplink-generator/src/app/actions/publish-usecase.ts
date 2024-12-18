@@ -1,3 +1,4 @@
+"use server";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Usecase, UsecaseStage } from "@prisma/client";
 import { db } from "../../../db";
