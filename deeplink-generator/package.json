@@ -10,7 +10,7 @@
 		"lint": "next lint"
 	},
 	"prisma": {
-		"seed": "node ./seed.js"
+		"seed": "node ./seeding/seed.js"
 	},
 	"overrides": {
 		"react": "19.0.0",

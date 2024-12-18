@@ -15,6 +15,7 @@ import {
 	FillerTypeObject,
 	flattenTemplate,
 	inputTypeMapper,
+	NamedEnum,
 } from "@/app/utils";
 import { createDeepLink, getTemplateById } from "@/app/actions";
 import {
@@ -76,15 +77,32 @@ const GenerateDeepLinkPage = async ({
 									(templateValue[key] as FillerTypeObject)?.enum!.length > 0 ? (
 										<Select
 											defaultValue={
-												(templateValue[key] as FillerTypeObject).enum![0]
+												typeof (templateValue[key] as FillerTypeObject).enum ===
+												"object"
+													? (
+															(templateValue[key] as FillerTypeObject)
+																.enum![0] as NamedEnum
+													  ).value
+													: (templateValue[key] as FillerTypeObject).enum![0]
 											}
 											fullWidth
 											name={key}
 										>
 											{(templateValue[key] as FillerTypeObject).enum!.map(
 												(value, index) => (
-													<MenuItem key={key + value + index} value={value}>
-														<Typography variant="body2">{value}</Typography>
+													<MenuItem
+														key={key + "option" + index}
+														value={
+															typeof value === "object"
+																? (value as NamedEnum).value
+																: value
+														}
+													>
+														<Typography variant="body2">
+															{typeof value === "object"
+																? (value as NamedEnum).name
+																: value}
+														</Typography>
 													</MenuItem>
 												)
 											)}

@@ -17,7 +17,7 @@ import React from "react";
 const PublishTemplatePage = async ({
 	params,
 }: {
-	params: { templateId: string };
+	params: Promise<{ templateId: string }>;
 }) => {
 	const templateId = (await params).templateId;
 	const handleFormSubmit = async (formData: FormData) => {

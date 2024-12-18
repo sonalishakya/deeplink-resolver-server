@@ -15,11 +15,11 @@ export const SocialsList = () => {
 			<Typography variant="h6" color="primary" align="center">
 				Share directly on Socials
 			</Typography>
-			{/* <Grid container spacing={1}>
+			<Grid container spacing={1}>
 				<Grid size={{ xs: 12 }}>
 
 				</Grid>
-			</Grid> */}
+			</Grid>
 		</Box>
 	);
 };

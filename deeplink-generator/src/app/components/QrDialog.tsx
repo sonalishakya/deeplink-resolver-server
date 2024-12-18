@@ -73,9 +73,9 @@ export const QrDialog = ({
 				const canvas: any = document.getElementById("qr-code-component");
 
 				if (canvas) {
-					const pngUrl = canvas
-						.toDataURL("image/png")
-						.replace("image/png", "image/octet-stream");
+					// const pngUrl = canvas
+					// 	.toDataURL("image/png")
+					// 	.replace("image/png", "image/octet-stream");
 
 					const pdfCreated = await getPdf(logoProps.logoImage, providerName);
 					const blob = new Blob([pdfCreated as Uint8Array], {
@@ -92,6 +92,7 @@ export const QrDialog = ({
 		if (open) {
 			generatePdf();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [open]);
 
 	const downloadQr = async () => {

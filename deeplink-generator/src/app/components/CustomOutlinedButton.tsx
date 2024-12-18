@@ -11,7 +11,7 @@ export const CustomOutlinedButton = ({
 }: CustomOutlinedButtonProps) => {
 	return (
 		<Link href={href}>
-		<ButtonBase>
+		<ButtonBase sx={{ width: "100%" }}>
 			<Paper
 				elevation={3}
 				sx={{
@@ -21,6 +21,7 @@ export const CustomOutlinedButton = ({
 					borderStyle: "solid",
 					borderRadius: 2,
 					bgcolor: "transparent",
+					width: "100%",
 					"&:hover": {
 						borderWidth: 3.5,
 						bgcolor: colors.grey[100],

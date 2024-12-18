@@ -74,7 +74,7 @@ const PublishDeepLinkPage = async ({
 								alignItems="center"
 								justifyContent="flex-start"
 							>
-								<FieldName fieldName="Publish To" />
+								<FieldName fieldName="Publish" />
 								<Typography variant="h5">:</Typography>
 								<Select
 									name="submissionOption"
