@@ -1,0 +1,68 @@
+{
+	"name": "SearchByCategory",
+	"description": "This is an example template",
+	"value": {
+		"context": {
+			"domain": {
+				"type": "string",
+				"filler": "user",
+				"enum": [
+					{ "name": "Grocery", "value": "ONDC:RET10" },
+					{ "name": "Fashion", "value": "ONDC:RET12" },
+					{ "name": "BPC", "value": "ONDC:RET13" }
+				]
+			},
+			"action": "search",
+			"country": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"city": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"core_version": "1.2.0",
+			"bap_id": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"bap_uri": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"transaction_id": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"message_id": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"timestamp": {
+				"filler": "pg",
+				"type": "string"
+			},
+			"ttl": "PT30S"
+		},
+		"message": {
+			"intent": {
+				"category": {
+					"type": "string",
+					"filler": "user",
+					"enum": [
+						{ "name": "Grocery", "value": "ONDC:RET10" },
+						{ "name": "Fashion", "value": "ONDC:RET12" },
+						{ "name": "BPC", "value": "ONDC:RET13" }
+					]
+				},
+				"payment": {
+					"@ondc/org/buyer_app_finder_fee_type": "percent",
+					"@ondc/org/buyer_app_finder_fee_amount": "5"
+				}
+			}
+		}
+	},
+	"templateStage": "SUBMITTED",
+	"category": "Retail",
+	"subCategory": "Search By Category"
+}

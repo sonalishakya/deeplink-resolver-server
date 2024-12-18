@@ -1,21 +1,26 @@
-'use client';
+"use client";
 import { styled } from "@mui/material/styles";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Toolbar } from "@mui/material";
+import { ThemeTogglerButton } from "./ThemeTogglerButton";
+import { useAppTheme } from "../hooks";
 // import Background_Img from "../../assets/images/Background.jpg";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Background = styled(Box)(() => ({
-	backgroundImage: `url("/background.jpg")`,
-	backgroundSize: "cover",
-	backgroundPosition: "center",
-	minHeight: "100vh",
-	justifyContent: "center",
-	alignItems: "center",
-}));
 
 export const BackgroundContainer: React.FC<{
 	children: React.ReactNode;
 }> = ({ children }) => {
+	const {mode} = useAppTheme()
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Background = styled(Box)(() => ({
+	backgroundImage: `url(${ mode === "light" ? "/background.jpg" : "/background_inverted.jpg"})`,
+	backgroundSize: "cover",
+	backgroundPosition: "center",
+	minHeight: "100vh",
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+}));
+
 	return (
 		<Background>
 			<Container
@@ -23,6 +28,9 @@ export const BackgroundContainer: React.FC<{
 					minHeight: "100vh",
 				}}
 			>
+				<Toolbar>
+					<ThemeTogglerButton />
+				</Toolbar>
 				{children}
 			</Container>
 		</Background>

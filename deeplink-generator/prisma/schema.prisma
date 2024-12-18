@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "windows"]
 }
 
 datasource db {
@@ -21,14 +22,21 @@ enum TemplateStage {
 }
 
 model Template {
-  id            String        @id @default(uuid())
-  name          String?
-  description   String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  value         Json
-  usecase       Usecase[]
-  templateStage TemplateStage
+  id                   String              @id @default(uuid())
+  name                 String?
+  description          String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  value                Json
+  category             UsecaseCategory?    @relation(fields: [usecaseCategoryId], references: [id])
+  subCategory          UsecaseSubcategory? @relation(fields: [usecaseSubcategoryId], references: [id])
+  usecase              Usecase[]
+  templateStage        TemplateStage
+  usecaseCategoryId    String?
+  usecaseSubcategoryId String?
+
+  @@unique([usecaseCategoryId, usecaseSubcategoryId])
+  @@index([usecaseCategoryId, usecaseSubcategoryId])
 }
 
 enum UsecaseStage {
@@ -45,6 +53,19 @@ model Usecase {
   updatedAt    DateTime     @updatedAt
   value        Json
   templateId   String
-  name         String
+  name         String?
+  qrPdfLink    String?
   usecaseStage UsecaseStage
+}
+
+model UsecaseCategory {
+  id       String     @id @default(uuid())
+  name     String     @unique
+  Template Template[]
+}
+
+model UsecaseSubcategory {
+  id       String     @id @default(uuid())
+  name     String     @unique
+  Template Template[]
 }

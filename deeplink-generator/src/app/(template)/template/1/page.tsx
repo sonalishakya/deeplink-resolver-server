@@ -11,28 +11,29 @@ import {
 } from "@mui/material";
 import React from "react";
 
-import template from "@/app/assets/template.json";
-import { selectTemplate } from "@/app/actions";
+// import template from "@/app/assets/template.json";
+import { getAllTemplates } from "@/app/actions";
+import { redirect } from "next/navigation";
+import { CustomHeading } from "@/app/components";
 
-const SelectBaseTemplatePage = () => {
+const SelectBaseTemplatePage = async () => {
+	const templates = await getAllTemplates();
+	if (templates.length === 0) {
+		redirect("/template/2/scratch");
+	}
+	const handleTemplateSelection = async (form: FormData) => {
+		"use server";
+		redirect(`/template/2/${form.get("templateId")}`);
+	};
 	return (
-		<Box
-			sx={{
-				minHeight: "100vh",
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "flex-start",
-			}}
-			component={"main"}
-		>
-			<Typography variant="h2">Select Template</Typography>
-			<form action={selectTemplate}>
+		<>
+			<CustomHeading heading="Select Base Template"/>
+			<form action={handleTemplateSelection}>
 				<TextField fullWidth title="Search Templates" />
-				<RadioGroup name="templateId" defaultValue={1}>
-					{[1, 2, 3, 4].map((i) => (
+				<RadioGroup name="templateId" defaultValue={templates[0].id}>
+					{templates.map((template) => (
 						<Box
-							key={i}
+							key={template.id}
 							sx={{
 								my: 1,
 								width: "100%",
@@ -41,7 +42,7 @@ const SelectBaseTemplatePage = () => {
 								alignItems: "center",
 							}}
 						>
-							<Radio value={i} required />
+							<Radio value={template.id} required />
 							<Accordion sx={{ ml: 1, width: "100%" }}>
 								<AccordionSummary>
 									<Typography>Usecase: {template.name}</Typography>
@@ -72,7 +73,7 @@ const SelectBaseTemplatePage = () => {
 					</Button>
 				</Box>
 			</form>
-		</Box>
+		</>
 	);
 };
 

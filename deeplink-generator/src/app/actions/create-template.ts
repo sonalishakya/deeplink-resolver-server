@@ -2,13 +2,13 @@
 
 import { TemplateStage } from "@prisma/client";
 import { db } from "../../../db";
-import { FormItem, inflate } from "../utils";
+import { FormItem, inflateTemplate } from "../utils";
 import { redirect } from "next/navigation";
 
 export async function createTemplate(templateId: string, formData: FormData) {
 	console.log("Template ID", templateId);
 	console.log("Form Data", formData);
-	const inflatedTemplate = inflate(
+	const inflatedTemplate = inflateTemplate(
 		Array.from(formData.entries()).map(
 			([key, value]) =>
 				({

@@ -1,3 +1,4 @@
+"use server";
 import { TemplateStage } from "@prisma/client";
 import { db } from "../../../db";
 

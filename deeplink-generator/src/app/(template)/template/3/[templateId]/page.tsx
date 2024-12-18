@@ -1,5 +1,5 @@
 import { publishTemplate } from "@/app/actions";
-import { CustomTextArea } from "@/app/components";
+import { CustomHeading, CustomTextArea } from "@/app/components";
 import {
 	Button,
 	MenuItem,
@@ -17,7 +17,7 @@ import React from "react";
 const PublishTemplatePage = async ({
 	params,
 }: {
-	params: { templateId: string };
+	params: Promise<{ templateId: string }>;
 }) => {
 	const templateId = (await params).templateId;
 	const handleFormSubmit = async (formData: FormData) => {
@@ -27,10 +27,8 @@ const PublishTemplatePage = async ({
 	};
 	return (
 		<>
-			<Typography variant="h2" sx={{ my: 2 }} align="center">
-				Customize Template
-			</Typography>
-			<Form action={handleFormSubmit} formMethod="POST">
+			<CustomHeading heading="Finalize Template"/>
+			<Form action={handleFormSubmit} formMethod="POST" style={{width: "100%"}}>
 				<Paper elevation={4} sx={{ p: 2 }}>
 					<Stack direction="row">
 						<Typography>Template ID:</Typography>
