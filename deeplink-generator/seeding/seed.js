@@ -36,7 +36,7 @@ const SUB_CATEGORIES = [
 		name: "Offers",
 	},
 	{
-		name: "Catelog Search",
+		name: "Sample 1",
 	},
 ];
 

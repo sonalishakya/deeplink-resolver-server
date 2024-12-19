@@ -9,7 +9,7 @@ export const CustomHeading = ({ heading }: CustomHeadingProps) => {
 	return (
 		<Paper sx={{ bgcolor: "primary.main", p: 2, width: "100%", my: 1 }}>
 			<Stack justifyContent="space-between" alignItems="center" direction="row">
-				<Typography variant="h4">{heading}</Typography>
+				<Typography variant="h4" fontWeight={900}>{heading}</Typography>
 				<ThemeTogglerButton />
 			</Stack>
 		</Paper>

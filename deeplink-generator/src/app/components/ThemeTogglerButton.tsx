@@ -13,7 +13,7 @@ export const ThemeTogglerButton = () => {
 		<Grow in timeout={800}>
 			<IconButton
 				onClick={() => toggleTheme()}
-				sx={{ border: `2px solid ${theme.palette.primary.dark}`, bgcolor: theme.palette.secondary.light }}
+				sx={{ border: `2px solid ${theme.palette.primary.dark}`, bgcolor: theme.palette.grey[100] }}
 			>
 				{mode === "dark" ? (
 					<DarkModeTwoToneIcon color="primary" />

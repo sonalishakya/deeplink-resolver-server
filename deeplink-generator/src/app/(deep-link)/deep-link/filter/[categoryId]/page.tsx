@@ -13,7 +13,7 @@ const SelectUsecaseSubcategory = async ({
 	const subcategories = await getUsecaseSubcategories();
 	return (
 		<>
-			<CustomHeading heading="Usecase Subcategories" />
+			<CustomHeading heading="USECASE SUBCATEGORIES" />
 
 			<Paper
 				elevation={3}
