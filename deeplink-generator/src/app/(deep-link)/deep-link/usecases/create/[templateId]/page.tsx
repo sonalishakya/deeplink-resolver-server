@@ -146,18 +146,18 @@ const GenerateDeepLinkPage = async ({
 									(templateValue[key] as FillerTypeObject)?.enum!.length > 0 ? (
 										<Select
 											defaultValue={
-												typeof (templateValue[key] as FillerTypeObject).enum ===
-												"object"
+												typeof (templateValue[key] as FillerTypeObject)
+													.enum?.[0] === "object"
 													? (
 															(templateValue[key] as FillerTypeObject)
-																.enum![0] as NamedEnum
-													  ).value
-													: (templateValue[key] as FillerTypeObject).enum![0]
+																.enum?.[0] as NamedEnum
+													  )?.value
+													: (templateValue[key] as FillerTypeObject).enum?.[0]
 											}
 											fullWidth
 											name={key}
 										>
-											{(templateValue[key] as FillerTypeObject).enum!.map(
+											{(templateValue[key] as FillerTypeObject).enum?.map(
 												(value, index) => (
 													<MenuItem
 														key={key + "option" + index}
@@ -199,14 +199,14 @@ const GenerateDeepLinkPage = async ({
 								(templateValue[key] as FillerTypeObject).filler !== "user"
 						)
 						.map((key: string, index) => (
-							<TextField
+							<input
+								type="hidden"
 								key={key + index}
-								value={
+								defaultValue={
 									typeof templateValue[key] === "object"
 										? JSON.stringify(templateValue[key])
-										: templateValue[key]
+										: String(templateValue[key])
 								}
-								sx={{ ml: 1, display: "none" }}
 								name={key}
 							/>
 						))}
