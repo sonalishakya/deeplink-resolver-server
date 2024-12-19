@@ -31,7 +31,7 @@ const SelectUsecaseSubcategory = async ({
 					{subcategories.map((subcategory, index) => (
 						<Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
 							<CustomOutlinedButton
-								href={`/deep-link/usecases/browse?category=${categoryId}&subcategory${subcategory.id}`}
+								href={`/deep-link/usecases/browse?category=${categoryId}&subcategory=${subcategory.id}`}
 								// label={formatToNormalCasing(subcategory.name)}
 								label={subcategory.name}
 							/>

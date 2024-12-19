@@ -6,6 +6,10 @@ export async function getTemplateById(id: string) {
 		where: {
 			id,
 		},
+		include: {
+			category: true,
+			subCategory: true,
+		},
 	});
 	return template;
 }

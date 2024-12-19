@@ -17,6 +17,7 @@ import { CustomContainedButtom, CustomHeading } from "@/app/components";
 import { redirect } from "next/navigation";
 import Form from "next/form";
 import Link from "next/link";
+import { Template } from "@prisma/client";
 
 const SelectUsecasePage = async ({
 	searchParams,
@@ -24,12 +25,15 @@ const SelectUsecasePage = async ({
 	searchParams: Promise<{ category: string; subcategory: string }>;
 }) => {
 	const { category, subcategory } = await searchParams;
+	console.log("category", category);
+	console.log("subcategory", subcategory);
 	const templates = await getTemplateByCategoryAndSubcategory(
 		category,
 		subcategory
 	);
-	if (templates.length === 1)
-		redirect(`/deep-link/usecases/create/${templates[0].id}`);
+
+	if (!Array.isArray(templates))
+		redirect(`/deep-link/usecases/create/${(templates as Template).id}`);
 
 	const handleSelection = async (form: FormData) => {
 		"use server";
@@ -41,7 +45,7 @@ const SelectUsecasePage = async ({
 			<Toolbar />
 			<CustomHeading heading="Select Template" />
 			<Toolbar />
-			{templates.length > 0 ? (
+			{Array.isArray(templates) && templates.length > 0 ? (
 				<Form action={handleSelection}>
 					<TextField
 						fullWidth

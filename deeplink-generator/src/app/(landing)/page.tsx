@@ -1,7 +1,7 @@
 import { Typography, Box, Fade } from "@mui/material";
 import Link from "next/link";
 import { CustomButton } from "../components";
-// import Image from "next/image";
+import Image from "next/image";
 
 export default function Home() {
 	return (
@@ -14,6 +14,11 @@ export default function Home() {
 			}}
 			component={"main"}
 		>
+			<Fade in timeout={800}>
+				<Box sx={{ width: 150, height: 100, position: "relative" }}>
+					<Image fill={true} src="/ondc_logo.png" alt="logo" />
+				</Box>
+			</Fade>
 			<Fade in timeout={1000}>
 				<Typography
 					variant="h1"
@@ -38,20 +43,20 @@ export default function Home() {
 				</Typography>
 			</Fade>
 			{/* <Grid container spacing={2} justifyContent="center" alignItems="center"> */}
-				{/* <Grid size={{xs: 12, md: 5}}>
+			{/* <Grid size={{xs: 12, md: 5}}>
 					<Link href="/template/1">
 						<CustomButton sx={{ padding: "40px 80px" }}>
 							<Typography variant="h3">Create Usecase</Typography>
 						</CustomButton>
 					</Link>
 				</Grid> */}
-				{/* <Grid size={{xs: 12, md: 5}}> */}
-					<Link href="/deep-link">
-						<CustomButton sx={{ padding: "40px 80px" }}>
-							<Typography variant="h3">Create Deeplink</Typography>
-						</CustomButton>
-					</Link>
-				{/* </Grid>
+			{/* <Grid size={{xs: 12, md: 5}}> */}
+			<Link href="/deep-link">
+				<CustomButton sx={{ padding: "40px 80px" }}>
+					<Typography variant="h3">Create Deeplink</Typography>
+				</CustomButton>
+			</Link>
+			{/* </Grid>
 			</Grid> */}
 		</Box>
 	);
