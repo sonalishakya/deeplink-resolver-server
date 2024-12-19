@@ -20,11 +20,11 @@ export const DownloadQr = ({ link }: DownloadQrProps) => {
 				flexDirection: "column",
 			}}
 		>
-			<Typography variant="h6" align="center" color="primary.light" mb={2}>
+			<Typography variant="h6" align="center" color="primary.light" marginBottom={"10px"} mb={2}>
 				Download QR
 			</Typography>
 			<IconButton
-				size="large"
+				size="medium"
 				sx={{
 					color: "white",
 					bgcolor: "primary.light",
