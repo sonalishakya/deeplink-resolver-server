@@ -46,6 +46,75 @@ const GenerateDeepLinkPage = async ({
 	return (
 		<>
 			<CustomHeading heading="Generate Deep Link" />
+			<Paper
+				elevation={4}
+				sx={{
+					p: 2,
+					borderColor: "primary.light",
+					borderWidth: 2,
+					borderStyle: "solid",
+					borderRadius: 2,
+					my: 2,
+					width: "100%",
+				}}
+			>
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "flex-start",
+						flexDirection: "row",
+						gap: 2,
+						mb: 2,
+					}}
+				>
+					<Typography>Template Name</Typography>
+					<Typography>:</Typography>
+					<Typography variant="body2">{template?.name}</Typography>
+				</Box>
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "flex-start",
+						flexDirection: "row",
+						gap: 2,
+						mb: 2,
+					}}
+				>
+					<Typography>Template Description</Typography>
+					<Typography>:</Typography>
+					<Typography variant="body2">{template?.description}</Typography>
+				</Box>
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "flex-start",
+						flexDirection: "row",
+						gap: 2,
+						mb: 2,
+					}}
+				>
+					<Typography>Template Category:</Typography>
+					<Typography>:</Typography>
+					<Typography variant="body2">{template?.category?.name}</Typography>
+				</Box>
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "flex-start",
+						flexDirection: "row",
+						gap: 2,
+						mb: 2,
+					}}
+				>
+					<Typography>Template Subcategory</Typography>
+					<Typography>:</Typography>
+					<Typography variant="body2">{template?.subCategory?.name}</Typography>
+				</Box>
+			</Paper>
 			<Form action={handleSubmit} formMethod="POST" style={{ width: "100%" }}>
 				<Paper
 					elevation={4}
@@ -77,18 +146,18 @@ const GenerateDeepLinkPage = async ({
 									(templateValue[key] as FillerTypeObject)?.enum!.length > 0 ? (
 										<Select
 											defaultValue={
-												typeof (templateValue[key] as FillerTypeObject).enum ===
-												"object"
+												typeof (templateValue[key] as FillerTypeObject)
+													.enum?.[0] === "object"
 													? (
 															(templateValue[key] as FillerTypeObject)
-																.enum![0] as NamedEnum
-													  ).value
-													: (templateValue[key] as FillerTypeObject).enum![0]
+																.enum?.[0] as NamedEnum
+													  )?.value
+													: (templateValue[key] as FillerTypeObject).enum?.[0]
 											}
 											fullWidth
 											name={key}
 										>
-											{(templateValue[key] as FillerTypeObject).enum!.map(
+											{(templateValue[key] as FillerTypeObject).enum?.map(
 												(value, index) => (
 													<MenuItem
 														key={key + "option" + index}
@@ -130,14 +199,14 @@ const GenerateDeepLinkPage = async ({
 								(templateValue[key] as FillerTypeObject).filler !== "user"
 						)
 						.map((key: string, index) => (
-							<TextField
+							<input
+								type="hidden"
 								key={key + index}
-								value={
+								defaultValue={
 									typeof templateValue[key] === "object"
 										? JSON.stringify(templateValue[key])
-										: templateValue[key]
+										: String(templateValue[key])
 								}
-								sx={{ ml: 1, display: "none" }}
 								name={key}
 							/>
 						))}
