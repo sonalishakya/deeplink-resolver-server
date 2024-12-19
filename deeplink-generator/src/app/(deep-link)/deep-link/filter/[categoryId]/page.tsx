@@ -1,8 +1,19 @@
-import { getUsecaseSubcategories } from "@/app/actions";
+import { getUsecaseCategories, getUsecaseSubcategories } from "@/app/actions";
 import { CustomHeading, CustomOutlinedButton } from "@/app/components";
 // import { formatToNormalCasing } from "@/app/utils";
-import { Grid2 as Grid, Paper, } from "@mui/material";
+import { Grid2 as Grid, Paper } from "@mui/material";
+import { UsecaseCategory } from "@prisma/client";
 import React from "react";
+
+export const revalidate = 3600;
+export const dynamicParams = true; // or false, to 404 on unknown paths
+
+export async function generateStaticParams() {
+	const posts: UsecaseCategory[] = await getUsecaseCategories()
+	return posts.map((post) => ({
+		id: String(post.id),
+	}));
+}
 
 const SelectUsecaseSubcategory = async ({
 	params,
