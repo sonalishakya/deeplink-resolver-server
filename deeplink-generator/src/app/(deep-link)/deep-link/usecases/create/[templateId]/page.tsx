@@ -45,7 +45,7 @@ const GenerateDeepLinkPage = async ({
 	};
 	return (
 		<>
-			<CustomHeading heading="Generate Deep Link" />
+			<CustomHeading heading="DEEP LINK GENERATOR" />
 			<Paper
 				elevation={4}
 				sx={{

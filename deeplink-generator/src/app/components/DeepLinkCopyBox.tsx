@@ -20,6 +20,8 @@ export const DeepLinkCopyBox = ({ deepLink }: DeepLinkCopyBoxProps) => {
 				display: "flex",
 				justifyContent: "space-between",
 				alignItems: "center",
+				padding: "15px 40px",
+				marginTop: "4%"
 			}}
 		>
 			<Typography variant="h4">

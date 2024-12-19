@@ -38,7 +38,7 @@ const PublishDeepLinkPage = async ({
 	};
 	return (
 		<>
-			<CustomHeading heading="Publish Deep Link" />
+			<CustomHeading heading="PUBLISH DEEP LINK" />
 			<Form
 				action={handleFormSubmit}
 				formMethod="POST"
@@ -63,7 +63,7 @@ const PublishDeepLinkPage = async ({
 								alignItems="center"
 								justifyContent="flex-start"
 							>
-								<FieldName fieldName="Name" />
+								<FieldName fieldName="Name"/>
 								<Typography variant="h5">:</Typography>
 								<TextField sx={{ ml: 1 }} name="name" fullWidth />
 							</Stack>
@@ -74,7 +74,7 @@ const PublishDeepLinkPage = async ({
 								alignItems="center"
 								justifyContent="flex-start"
 							>
-								<FieldName fieldName="Publish" />
+								<FieldName fieldName="Push" />
 								<Typography variant="h5">:</Typography>
 								<Select
 									name="submissionOption"

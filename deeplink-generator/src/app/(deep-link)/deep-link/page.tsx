@@ -9,7 +9,7 @@ const SelectUsecaseCategoryPage = async () => {
 	const categories = await getUsecaseCategories();
 	return (
 		<>
-			<CustomHeading heading="Usecase Categories" />
+			<CustomHeading heading="USECASE CATEGORIES" />
 			<Paper
 				elevation={3}
 				sx={{
