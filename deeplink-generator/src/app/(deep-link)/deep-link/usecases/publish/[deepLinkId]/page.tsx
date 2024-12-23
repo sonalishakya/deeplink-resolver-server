@@ -56,17 +56,40 @@ const PublishDeepLinkPage = async ({
 					}}
 				>
 					<Grid container spacing={1}>
-						<Grid size={{ xs: 12, md: 6 }}>
+						<Grid size={{ xs: 6, md: 12 }}>
 							<Stack
 								direction="row"
 								my={2}
 								alignItems="center"
 								justifyContent="flex-start"
 							>
-								<FieldName fieldName="Name"/>
-								<Typography variant="h5">:</Typography>
-								<TextField sx={{ ml: 1 }} name="name" fullWidth />
+								<FieldName fieldName="Creater's Name"/>
+								<Typography variant="h5">&nbsp; &nbsp;</Typography>
+								<TextField sx={{ ml: 1 }} name="Creater's Name" fullWidth />
 							</Stack>
+
+							<Stack
+								direction="row"
+								my={2}
+								alignItems="center"
+								justifyContent="flex-start"
+							>
+								<FieldName fieldName="Deeplink Name"/>
+								<Typography variant="h5">&nbsp; &nbsp;</Typography>
+								<TextField sx={{ ml: 1 }} name="Deeplink Name" fullWidth />
+							</Stack>
+
+							<Stack
+								direction="row"
+								my={2}
+								alignItems="center"
+								justifyContent="flex-start"
+							>
+								<FieldName fieldName="Description"/>
+								<Typography variant="h5">&nbsp; &nbsp;</Typography>
+								<TextField sx={{ ml: 1 }} name="Description" fullWidth />
+							</Stack>
+
 							<Divider />
 							<Stack
 								direction="row"
@@ -74,27 +97,28 @@ const PublishDeepLinkPage = async ({
 								alignItems="center"
 								justifyContent="flex-start"
 							>
-								<FieldName fieldName="Push" />
-								<Typography variant="h5">:</Typography>
+								<FieldName fieldName="Publish" />
+								<Typography variant="h5">&nbsp; &nbsp;</Typography>
 								<Select
 									name="submissionOption"
 									defaultValue={UsecaseStage.PUBLISHED}
 									fullWidth
 								>
 									<MenuItem value={UsecaseStage.SUBMITTED}>
-										Keep Private
+										Save Private
 									</MenuItem>
 									<MenuItem value={UsecaseStage.PUBLISHED}>
-										Publish to GitHub
+										Publish to server
 									</MenuItem>
 								</Select>
 							</Stack>
 							<Divider />
 						</Grid>
-						<Grid size={{ xs: 12, md: 6 }}>
+						<Grid size={{ xs: 6, md: 12 }}>
 							<JsonViewer data={usecase?.value as object}/>
 							{/* <Typography>{JSON.stringify(usecase?.value)}</Typography> */}
 						</Grid>
+						
 					</Grid>
 				</Paper>
 				<Box
