@@ -21,7 +21,8 @@ export const FieldName = ({
 				borderWidth: 2,
 				borderStyle: "solid",
 				borderRadius: 2,
-				...paperSx,
+				width: "30%",
+				...paperSx
 			}}
 		>
 			<Typography color="primary.light" sx={{ ...typographySx }}>
