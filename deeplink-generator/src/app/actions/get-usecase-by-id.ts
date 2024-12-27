@@ -6,6 +6,9 @@ export async function getUsecaseById(id: string) {
 		where: {
 			id,
 		},
+		include: {
+			template: true,
+		}
 	});
 	return usecase;
 }
