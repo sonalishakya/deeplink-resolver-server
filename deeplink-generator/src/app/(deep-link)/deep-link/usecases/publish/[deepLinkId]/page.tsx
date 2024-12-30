@@ -112,8 +112,8 @@ const PublishDeepLinkPage = async ({
 							</Grid>
 							<Divider />
 						</Grid>
-						<Grid size={{ xs: 6, md: 12 }}>
-							<JsonViewer data={usecase?.value as object}/>
+						<Grid size={{ xs: 12}}>
+							<UsecaseEditor usecase={usecase!} />
 							{/* <Typography>{JSON.stringify(usecase?.value)}</Typography> */}
 						</Grid>
 						

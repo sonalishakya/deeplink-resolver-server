@@ -25,7 +25,7 @@ export const FieldName = ({
 				...paperSx
 			}}
 		>
-			<Typography color="primary.light" sx={{ ...typographySx }}>
+			<Typography color="primary.light" sx={{ ...typographySx }} noWrap title={fieldName}>
 				{fieldName}
 			</Typography>
 		</Paper>
