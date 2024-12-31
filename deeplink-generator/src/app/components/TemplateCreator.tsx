@@ -69,7 +69,6 @@ export const TemplateCreator = ({ template }: TemplateCreatorProps) => {
 	};
 
 	const handleFormSubmit = async (formData: FormData) => {
-		// "use server";
 		const response = await createTemplate(template.id as string, formData);
 		console.log("Response:", response);
 	};

@@ -3,8 +3,8 @@ import {
 	CustomContainedButtom,
 	CustomHeading,
 	FieldName,
+	UsecaseEditor,
 } from "@/app/components";
-import JsonViewer from "@/app/components/JsonViewer";
 import {
 	Box,
 	Divider,
@@ -12,9 +12,10 @@ import {
 	MenuItem,
 	Paper,
 	Select,
-	Stack,
 	TextField,
 	Typography,
+	Stack
+
 } from "@mui/material";
 import { UsecaseStage } from "@prisma/client";
 import Form from "next/form";
@@ -114,8 +115,8 @@ const PublishDeepLinkPage = async ({
 							</Stack>
 							<Divider />
 						</Grid>
-						<Grid size={{ xs: 6, md: 12 }}>
-							<JsonViewer data={usecase?.value as object}/>
+						<Grid size={{ xs: 12}}>
+							<UsecaseEditor usecase={usecase!} />
 							{/* <Typography>{JSON.stringify(usecase?.value)}</Typography> */}
 						</Grid>
 						
