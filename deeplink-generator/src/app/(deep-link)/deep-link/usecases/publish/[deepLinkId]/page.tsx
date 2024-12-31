@@ -13,6 +13,9 @@ import {
 	Paper,
 	Select,
 	TextField,
+	Typography,
+	Stack
+
 } from "@mui/material";
 import { UsecaseStage } from "@prisma/client";
 import Form from "next/form";
@@ -109,7 +112,7 @@ const PublishDeepLinkPage = async ({
 										Publish to server
 									</MenuItem>
 								</Select>
-							</Grid>
+							</Stack>
 							<Divider />
 						</Grid>
 						<Grid size={{ xs: 12}}>
