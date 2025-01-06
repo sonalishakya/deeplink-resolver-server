@@ -24,19 +24,19 @@ const CATEGORIES = [
 
 const SUB_CATEGORIES = [
 	{
-		name: "Search By City",
+		name: "Search By Item Name",
 	},
 	{
-		name: "Search By Item",
-	},
-	{
-		name: "Search By Category",
-	},
-	{
-		name: "Multiple Seller Search",
+		name: "Search By Item Code",
 	},
 	{
 		name: "Seller-Catalog Search",
+	},
+	{
+		name: "Search By City",
+	},
+	{
+		name: "Search By Category",
 	},
 ];
 

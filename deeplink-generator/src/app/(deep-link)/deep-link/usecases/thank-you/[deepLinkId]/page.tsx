@@ -32,7 +32,7 @@ const DeepLinkThankYouPage = async ({
 			<Typography variant="h4" color="primary" align="center" fontWeight="900" my={3}>
 				Thank You for using ONDC, here&apos;s your deep link!
 			</Typography>
-			<DeepLinkCopyBox deepLink={`beckn://github.ondc.ret10/${deepLinkId}`} />
+			<DeepLinkCopyBox deepLink={`beckn://github.ret10.ondc/${deepLinkId}`} />
 			<Grid container spacing={2}>
 				<Grid size={{ xs: 12 }}>
 					<Box sx={{ display: "flex", justifyContent: "center", marginTop: "30px", marginBottom: "30px", py:2 }}>	
@@ -42,7 +42,7 @@ const DeepLinkThankYouPage = async ({
 					</Box>
 				</Grid>
 				<Grid size={{ xs: 12, md: 5 }}>
-					<DownloadQr link={`beckn://github.ondc.ret10/${deepLinkId}`}/>
+					<DownloadQr link={`beckn://github.ret10.ondc/${deepLinkId}`}/>
 				</Grid>
 				<Divider orientation="vertical" variant="middle" flexItem />
 				<Grid size={{ xs: 12, md: 6 }}>
