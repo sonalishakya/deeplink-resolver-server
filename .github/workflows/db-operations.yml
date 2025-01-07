@@ -1,0 +1,29 @@
+name: Database Operations
+on:
+  workflow_dispatch:
+
+jobs:
+  db-reset-and-migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute Generator DB Operations
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PEM }}
+          port: 22
+          script: |
+            cd deeplink-resolver-server/deeplink-generator
+
+            echo "DB Teardown and Restart"
+            sudo docker compose down ondc_deep_link_db
+            sudo docker compose up -d ondc_deep_link_db
+            
+            sleep 10
+
+            sudo docker build -t migrations-runner -f Dockerfile.migration .
+            sudo docker run --rm \
+              --network deeplink-generator_default \
+              migrations-runner
+

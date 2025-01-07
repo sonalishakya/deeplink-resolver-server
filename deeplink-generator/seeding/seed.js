@@ -4,42 +4,6 @@ import path from "path";
 
 const prisma = new PrismaClient();
 
-const CATEGORIES = [
-	{
-		name: "Retail",
-	},
-	{
-		name: "Logistics",
-	},
-	{
-		name: "Services",
-	},
-	{
-		name: "Subscription",
-	},
-	{
-		name: "IGM",
-	},
-];
-
-const SUB_CATEGORIES = [
-	{
-		name: "Search By Item Name",
-	},
-	{
-		name: "Search By Item Code",
-	},
-	{
-		name: "Seller-Catalog Search",
-	},
-	{
-		name: "Search By City",
-	},
-	{
-		name: "Search By Category",
-	},
-];
-
 async function readJsonFiles() {
 	const currentDir = path.join(process.cwd(), "seeding");
 	console.log("CWD", currentDir);
@@ -57,21 +21,60 @@ async function readJsonFiles() {
 }
 
 async function main() {
-	const c = await prisma.usecaseCategory.createMany({
-		data: CATEGORIES,
-	});
-	const sc =await prisma.usecaseSubcategory.createMany({
-		data: SUB_CATEGORIES,
-	});
-	console.log("Seeded Categories ", c);
-	console.log("Seeded Sub Categories ", sc);
-	const seededCategories = await prisma.usecaseCategory.findMany();
-	const seededSubCategories = await prisma.usecaseSubcategory.findMany();
 	const filesData = await readJsonFiles();
 	// console.log(filesData)
+	const categorySubcategoryMap = {};
+	filesData.forEach(async (file) => {
+		const { category, subCategory } = file;
+		if (categorySubcategoryMap[category]) {
+			categorySubcategoryMap[category].push(subCategory);
+		} else {
+			categorySubcategoryMap[category] = [subCategory];
+		}
+	});
+	console.log(categorySubcategoryMap);
+	Object.keys(categorySubcategoryMap).forEach(async (category) => {
+		const c = await prisma.usecaseCategory.create({
+			data: {
+				name: category,
+			},
+		});
+		const sc = await prisma.usecaseSubcategory.createMany({
+			data: categorySubcategoryMap[category].map((subCategory) => ({
+				name: subCategory,
+				usecaseCategoryId: c.id,
+			})),
+		});
+		console.log("Seeded Subcategory", sc);
+	});
+
+	const seededCategories = await prisma.usecaseCategory.findMany();
+	const seededSubCategories = await prisma.usecaseSubcategory.findMany();
+
+	console.log("Seeded Categories", seededCategories);
+	console.log("Seeded SubCategories", seededSubCategories);
+
 	const processedData = filesData.map((file) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const {category, subCategory, ...remainingFile} = file
+		const { category, subCategory, ...remainingFile } = file;
+		console.log(
+			"FILTERED category",
+			file.category.toLowerCase(),
+			seededCategories.filter(
+				(category) =>
+					category.name.toLowerCase() === file.category.toLowerCase()
+			)[0].id
+		);
+	
+		console.log(
+			"FILTERED sub-category",
+			file.subCategory.toLowerCase(),
+			seededCategories.filter(
+				(category) =>
+					category.name.toLowerCase() === file.category.toLowerCase()
+			)[0].id
+		);
+
 		return {
 			...remainingFile,
 			usecaseCategoryId: seededCategories.filter(
